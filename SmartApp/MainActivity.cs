@@ -16,6 +16,7 @@ namespace SmartApp
         private TextView textView;
         private string _userCommand;
 
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -58,7 +59,7 @@ namespace SmartApp
             }
         }
 
-        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        protected override async void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             if (requestCode == VOICE)
             {
@@ -68,6 +69,21 @@ namespace SmartApp
                     if (matches.Count != 0)
                     {
                         _userCommand = matches[0];
+
+                        IntentHandler intentHandler = new IntentHandler();
+
+                        using (var router = Microsoft.Cognitive.LUIS.IntentRouter.Setup(APP_ID, SUBCRIPTION_KEY, intentHandler))
+                        {
+                            var handled = await router.Route(_userCommand, this);
+                            if (!handled)
+                            {
+                                WriteInterpretation("Could not process text.");
+                            }
+                            else
+                            {
+                                //Speech understood and processed.
+                            }
+                        }
                     }
                     else
                     {

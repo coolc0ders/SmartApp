@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Microsoft.Cognitive.LUIS;
 
 namespace SmartApp
 {
@@ -17,12 +18,12 @@ namespace SmartApp
         [IntentHandler(0.5, Name = "")]
         public async void IdentifyObstacle(LuisResult result, object context)
         {
-
+            ;
         }
         [IntentHandler(0.5, Name = "None")]
         public void None(LuisResult result, object context)
         {
-            (context as MainActivity).Speak("Sory, but I didn't understand what you meant.");
+            //(context as MainActivity).Speak("Sory, but I didn't understand what you meant.");
         }
         [IntentHandler(0.5, Name = "")]
         public void SetPictures(LuisResult result, object context)
