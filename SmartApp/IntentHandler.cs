@@ -15,19 +15,23 @@ namespace SmartApp
 {
     class IntentHandler
     {
-        [IntentHandler(0.5, Name = "")]
+        [IntentHandler(0.5, Name = "OnTheLight")]
         public async void IdentifyObstacle(LuisResult result, object context)
         {
-            ;
+            var activity = context as MainActivity;
+            activity.WriteInterpretation("The light was turned on.");
         }
         [IntentHandler(0.5, Name = "None")]
         public void None(LuisResult result, object context)
         {
-            //(context as MainActivity).Speak("Sory, but I didn't understand what you meant.");
+            var activity = context as MainActivity;
+            activity.WriteInterpretation("I couldn't understand you.");
         }
-        [IntentHandler(0.5, Name = "")]
+        [IntentHandler(0.5, Name = "OffTheLight")]
         public void SetPictures(LuisResult result, object context)
         {
+            var activity = context as MainActivity;
+            activity.WriteInterpretation("The light was turned off.");
         }
     }
 }

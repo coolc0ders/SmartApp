@@ -15,7 +15,9 @@ namespace SmartApp
         private Button recButton;
         private TextView textView;
         private string _userCommand;
-
+        
+        const string APP_ID = "";
+        const string SUBCRIPTION_KEY = "";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
